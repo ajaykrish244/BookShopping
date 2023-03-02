@@ -1,0 +1,70 @@
+<%= form_with(model: transaction, local: true) do |form| %>
+  <% if transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+        <% transaction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>You are purchasing the product: <%= @book.name %></p>
+
+  <div class="field">
+    <% qty = @book.quantity %>
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, :id => 'quantity', min: 1, max: qty, onchange: "calculateTotalPrice();" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total_cost %>
+    <%= form.text_field :total_cost, :id => 'total_cost', :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :book_id, value: @book.id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :credit_card_number, "Credit card number" %>
+    <% if current_user.credit_card_number.present? %>
+      <%= form.text_field :credit_card_number, :id => 'credit_card_number', value: current_user.credit_card_number %>
+    <% else %>
+      <%= form.text_field :credit_card_number, :id => 'credit_card_number'%>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address, "Address" %>
+    <% if current_user.address.present? %>
+      <%= form.text_field :address, :id => 'address', value: current_user.address %>
+    <% else %>
+      <%= form.text_field :address, :id => 'address'%>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone_number, "Phone number" %>
+    <% if current_user.phone_number.present? %>
+      <%= form.text_field :phone_number, :id => 'phone_number', value: current_user.phone_number %>
+    <% else %>
+      <%= form.text_field :phone_number, :id => 'phone_number'%>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Complete purchase" %>
+  </div>
+
+<%# end %>
+
+  <script type="text/javascript">
+      function calculateTotalPrice() {
+          var price = "<%= @book.price %>";
+          document.getElementById('total_cost').value = document.getElementById('quantity').value * price;
+      }
+  </script>
+<% end %>

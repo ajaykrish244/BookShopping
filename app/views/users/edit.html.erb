@@ -1,0 +1,14 @@
+<h1>Editing user</h1>
+
+<% if !current_user.admin? %>
+  <%= render "form", user: current_user %>
+<% else %>
+  <%= render "form", user: @user %>
+<% end %>
+
+
+  <br>
+
+<div>
+  <%= link_to "Back to user", @user %>
+</div>

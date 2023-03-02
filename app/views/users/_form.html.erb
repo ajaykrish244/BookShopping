@@ -1,0 +1,63 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <strong>* indicates required field</strong>
+  </p>
+
+  <div class="field">
+    <%= form.label :name, 'name*' %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, 'email*' %>
+    <%= form.text_field :email %>
+  </div>
+
+  <% if !@user.admin? %>
+    <div class="field">
+      <%= form.label :username, 'username*' %>
+      <%= form.text_field :username %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password, 'password*' %>
+      <%= form.password_field :password %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password_confirmation, 'password confirmation*' %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+
+    <div class="field">
+      <%= form.label :address %>
+      <%= form.text_area :address %>
+    </div>
+
+    <div class="field">
+      <%= form.label :credit_card_number %>
+      <%= form.text_area :credit_card_number %>
+    </div>
+
+    <div class="field">
+      <%= form.label :phone_number %>
+      <%= form.text_field :phone_number %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

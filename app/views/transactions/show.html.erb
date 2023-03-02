@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Transaction number:</strong>
+  <%= @transaction.transaction_number %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= Book.find(@transaction.book_id).name %>
+</p>
+<p>
+  <strong>Quantity:</strong>
+  <%= @transaction.quantity %>
+</p>
+
+<p>
+  <strong>Total cost:</strong>
+  <%= @transaction.total_cost %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @transaction.address %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @transaction.phone_number %>
+</p>
+
+<p>
+  <strong>Credit card number:</strong>
+  <%= @transaction.credit_card_number %>
+</p>
+
+<%= link_to 'Back', transactions_path %>

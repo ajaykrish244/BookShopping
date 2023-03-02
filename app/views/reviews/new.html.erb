@@ -1,0 +1,9 @@
+<h1>New review</h1>
+<p><strong>Review for the book:  </strong><%= @book.name%></p>
+<%= render "form", review: @review %>
+
+<br>
+
+<div>
+  <%= link_to "Back to reviews", book_reviews_path(@book) %>
+</div>

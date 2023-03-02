@@ -1,0 +1,37 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Reviews</h1>
+
+<%= form_tag book_reviews_path(@book), :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search_by_username,nil, placeholder: "Enter username" %>
+    <%= submit_tag "search", :name => nil %>
+  </p>
+<% end %>
+
+<% if @reviews == nil %>
+<div id="reviews">
+  <% if !@book.reviews.any?%>
+      <p>No reviews for this book yet!</p>
+  <%else%>
+  <% @book.reviews.each do |review| %>
+    <%= render review %>
+    <p><strong>Name of the book:  </strong><%= @book.name%></p>
+    <p><strong>Review by user:  </strong><%= User.find(review.user_id).username%></p>
+  <p><%= link_to "Show this review", book_review_path(review.book, review) %></p>
+  <% end %>
+  <%end%>
+<%else%>
+<% @reviews.each do |review| %>
+    <%= render review %>
+    <p><strong>Name of the book:  </strong><%= @book.name%></p>
+    <p><strong>Review by user:  </strong><%= User.find(review.user_id).username%></p>
+  <p><%= link_to "Show this review", book_review_path(review.book, review) %></p>
+<% end %>
+<% end %>
+
+</div>
+
+<%= link_to "Write a new review", new_book_review_path(@book) %><br><br>
+<%= link_to "Back", books_path%>
+

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+two:
+  id: 1
+  name: pride and prejudice
+  author: jane austen
+  publisher: penguin
+  quantity: 97
+  price: 5

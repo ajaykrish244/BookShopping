@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Purchase history</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Transaction number</th>
+    <th>Book</th>
+    <th>Quantity</th>
+    <th>Total cost</th>
+    <th colspan="6"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @transactions.each do |transaction| %>
+    <tr>
+      <td><%= transaction.transaction_number %></td>
+      <td><%= Book.find(transaction.book_id).name %></td>
+      <td><%= transaction.quantity %></td>
+      <td><%= transaction.total_cost %></td>
+      <td><%= link_to 'Show', transaction %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<br><td><%= link_to "Back", root_path %></td>
